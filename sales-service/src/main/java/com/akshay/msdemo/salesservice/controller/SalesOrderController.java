@@ -30,13 +30,20 @@ public class SalesOrderController {
                                   @RequestParam(value = "customerEmail") String customerEmail
 //                                  ,@RequestParam(value = "itemsList") String [] itemsList
     ) {
-        System.out.println("reached here");
-//        SalesOrder response = new SalesOrder();
-        System.out.println("received all these customers from core service: " + customerServiceProxy.getAllCustomers());
-        System.out.println("*********************" + customerServiceProxy.getCustomerByEmail(customerEmail));
-//        System.out.println(response);
+//        System.out.println("received all these customers from core service: " + customerServiceProxy.getAllCustomers());
 
-        return null;
+        SalesOrder response = customerServiceProxy.getCustomerByEmail(customerEmail);
+        if (customerServiceProxy.getCustomerByEmail(customerEmail) != null) {
+            System.out.println("email matched...");
+            response.setCustomerEmail(customerEmail);
+            response.setDescription(description);
+            System.out.println(response.getCustomerEmail());
+            return response;
+        }
+        else {
+            System.out.println("Hey '" + customerEmail + "' you aren't registered yet! Please register...");
+            return null;
+        }
     }
 
 }
