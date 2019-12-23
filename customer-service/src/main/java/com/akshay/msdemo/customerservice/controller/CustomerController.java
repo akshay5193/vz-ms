@@ -12,27 +12,27 @@ import java.util.List;
 
 @RefreshScope
 @RestController
-@RequestMapping("/customers")
+//@RequestMapping("/customers")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
 
 
-    @GetMapping("/{email}")
-    public Customer getCustomerByEMail(@PathVariable("email") String email) {
+    @GetMapping("/customers/{email}")
+    public Customer getCustomerByEmail(@PathVariable("email") String email) {
         Customer customerWithEmail = customerService.findByEmail(email);
         return customerWithEmail;
     }
 
-    @GetMapping("/")
+    @GetMapping("/customers")
     public List<Customer> getAllCustomers() {
         List<Customer> allCustomers = customerService.findAllCustomers();
         return allCustomers;
     }
 
 
-    @PostMapping("/add")
+    @PostMapping("/customers/add")
     public Customer addCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
         if (result.hasErrors()) {
             System.out.println("failed to create customer...");

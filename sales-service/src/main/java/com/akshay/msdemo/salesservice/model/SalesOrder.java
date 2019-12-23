@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "sales-order")
+@Table(name = "sales_order")
 public class SalesOrder {
 
     @Id
@@ -20,14 +20,14 @@ public class SalesOrder {
     @Size(min=2, max=300)
     private String description;
 
-    @DecimalMin("0.1")
-    private Double price;
+//    @DecimalMin("0.1")
+//    private Double price;
 
 //    -----------------------------------------------------------
 
-    private Long customerId;
-    @ElementCollection
-    List<String> itemsList = new ArrayList<String>();
+    private String customerEmail;
+//    @ElementCollection
+//    List<String> itemsList = new ArrayList<String>();
 
 //    @ElementCollection
 //    private List<Long> itemIds = new ArrayList<>();
@@ -41,9 +41,61 @@ public class SalesOrder {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
-    public SalesOrder() {
+    protected SalesOrder() {
     }
 
-    public SalesOrder(String description, Double price, String email) {
+    public SalesOrder(String description, String email) {
+        this.description = description;
+        this.customerEmail = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Date();
     }
 }
