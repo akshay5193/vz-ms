@@ -1,6 +1,5 @@
 package com.akshay.msdemo.salesservice.model;
 
-import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,31 +10,28 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "sales_order")
-@Data
-public class SalesOrder {
+@Table(name = "items")
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min=2, max=180)
+    private String name;
+
     @Size(min=2, max=300)
     private String description;
 
-//    @DecimalMin("0.1")
-//    private Double price;
+    @DecimalMin("0.1")
+    private Double price;
 
-//    -----------------------------------------------------------
-
-    private String customerEmail;
+//    -----------------------------------------------------
 
     @ElementCollection
-    List<String> itemsList = new ArrayList<String>();
+    private List<Long> customerIds = new ArrayList<>();
 
-//    @ElementCollection
-//    private List<Long> itemIds = new ArrayList<>();
-
-//    -----------------------------------------------------------
+//    -----------------------------------------------------
 
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -44,12 +40,13 @@ public class SalesOrder {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
-    protected SalesOrder() {
+    public Item() {
     }
 
-    public SalesOrder(String description, String email) {
+    public Item(String name, String description, double price) {
+        this.name = name;
         this.description = description;
-        this.customerEmail = email;
+        this.price = price;
     }
 
     public Long getId() {
@@ -60,6 +57,14 @@ public class SalesOrder {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -68,20 +73,12 @@ public class SalesOrder {
         this.description = description;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-    public List<String> getItemsList() {
-        return itemsList;
-    }
-
-    public void setItemsList(List<String> itemsList) {
-        this.itemsList = itemsList;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Date getCreateAt() {
@@ -109,4 +106,5 @@ public class SalesOrder {
     protected void onUpdate() {
         this.updatedAt = new Date();
     }
+
 }

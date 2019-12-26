@@ -36,9 +36,9 @@ public class ItemController {
         return  itemWithName;
     }
 
-    @GetMapping("/items/{itemsList}")
-    public List<Item> getItemsByList(@PathVariable("itemsList") List<String> itemsList) {
-        return itemService.findByNamesList(itemsList);
-    }
+//    @GetMapping("/items/{itemsList}")
+//    public List<Item> getItemsByList(@PathVariable("itemsList") List<String> itemsList) {
+//        return itemService.findByNamesList(itemsList);
+//    }
 
 }

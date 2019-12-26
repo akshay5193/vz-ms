@@ -38,7 +38,7 @@ public class CustomerController {
             System.out.println("failed to create customer...");
             return null;
         } else {
-            System.out.println("Customer created...");
+            System.out.println("Customer created..." + customer.getCreateAt());
             return customerService.addNewCustomer(customer);
         }
     }
