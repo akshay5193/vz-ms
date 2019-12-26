@@ -10,10 +10,12 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/sales-order")
+@RequestMapping(value = "/sales-order", produces = "application/json")
 public class SalesOrderController {
 
     @Autowired
@@ -35,7 +37,7 @@ public class SalesOrderController {
     }
 
     @PostMapping("/")
-    public SalesOrder createOrder(@RequestBody SalesOrder orderData) {
+    public Long createOrder(@RequestBody SalesOrder orderData) {
 
         Boolean flag = true;
         Double calculatedTotal = 0.0;
@@ -64,7 +66,7 @@ public class SalesOrderController {
                 orderData.setTotalPrice(calculatedTotal);
                 SalesOrder orderToPersist = salesOrderService.addNewOrder(orderData);
                 orderLineItemService.addItemsToOrder(itemNames, orderToPersist.getId());
-                return orderToPersist;
+                return orderToPersist.getId();
             }
             else {
                 // send message saying items currently not available in the store...
@@ -73,6 +75,16 @@ public class SalesOrderController {
             }
         }
         System.out.println("Customer with the provided email is not registered yet... [tracked in sales-order while placing the order!");
+        return null;
+    }
+
+    @GetMapping("/{customerEmail}" )
+    public List<SalesOrder> getOrdersByEmail(@PathVariable("customerEmail") String customerEmail) {
+        List<SalesOrder> matchingOrders = salesOrderService.findOrdersByEmail(customerEmail);
+        if (matchingOrders != null) {
+            System.out.println(matchingOrders + "...MO...");
+            return matchingOrders;
+        }
         return null;
     }
 
