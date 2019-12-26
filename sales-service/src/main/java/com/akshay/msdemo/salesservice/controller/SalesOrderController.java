@@ -4,6 +4,7 @@ import com.akshay.msdemo.salesservice.model.Customer;
 import com.akshay.msdemo.salesservice.service.CustomerServiceProxy;
 import com.akshay.msdemo.salesservice.model.SalesOrder;
 import com.akshay.msdemo.salesservice.service.ItemProxy;
+import com.akshay.msdemo.salesservice.service.OrderLineItemService;
 import com.akshay.msdemo.salesservice.service.SalesOrderService;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class SalesOrderController {
 
     @Autowired
     private SalesOrderService salesOrderService;
+
+    @Autowired
+    private OrderLineItemService orderLineItemService;
 
     @Autowired
     private CustomerServiceProxy customerServiceProxy;
@@ -44,7 +48,7 @@ public class SalesOrderController {
             System.out.println("email matched...");
 
             for(String item: itemNames){
-                if (itemProxy.findItemByName(item) != null ) {
+                if (itemProxy.findItemByName(item) != null) {
                     calculatedTotal += itemProxy.findItemByName(item).getPrice();
 //                    continue;
                 }
@@ -58,7 +62,9 @@ public class SalesOrderController {
                 // send the orderData to service and persist the object
                 System.out.println("flag = true , so everything looks good and now attempting to create the order");
                 orderData.setTotalPrice(calculatedTotal);
-                return salesOrderService.addNewOrder(orderData);
+                SalesOrder orderToPersist = salesOrderService.addNewOrder(orderData);
+                orderLineItemService.addItemsToOrder(itemNames, orderToPersist.getId());
+                return orderToPersist;
             }
             else {
                 // send message saying items currently not available in the store...
