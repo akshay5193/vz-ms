@@ -22,8 +22,8 @@ public class SalesOrder {
     @Size(min=2, max=300)
     private String description;
 
-//    @DecimalMin("0.1")
-//    private Double price;
+    @DecimalMin("0.1")
+    private Double totalPrice;
 
 //    -----------------------------------------------------------
 
@@ -82,6 +82,14 @@ public class SalesOrder {
 
     public void setItemsList(List<String> itemsList) {
         this.itemsList = itemsList;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Date getCreateAt() {
