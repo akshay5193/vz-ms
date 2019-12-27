@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 //@FeignClient(name="customer-service", url="localhost:8000")
-//@FeignClient(name="customer-service")       // you do not need the url while using the Ribbon load balancing
-@FeignClient(name="zuul-api-gateway-server")    // to make requests go through the ZUUL API GATEWAY
+@FeignClient(name="customer-service")       // you do not need the url while using the Ribbon load balancing
+//@FeignClient(name="zuul-api-gateway-server")    // to make requests go through the ZUUL API GATEWAY
 @RibbonClient(name = "customer-service")
 public interface CustomerServiceProxy  {
 
@@ -20,12 +20,12 @@ public interface CustomerServiceProxy  {
         System.out.println("Default Method Executed");
     }
 
-//    @GetMapping("/customers/{email}")
-    @GetMapping("/customer-service/api/customers/{email}")
+    @GetMapping("/api/customers/{email}")
+//    @GetMapping("/customer-service/api/customers/{email}")
     public Customer getCustomerByEmail(@PathVariable("email") String email);
 
-//    @GetMapping("/customers")
-    @GetMapping("/customer-service/api/customers")
+    @GetMapping("/api/customers")
+//    @GetMapping("/customer-service/api/customers")
     public List<Customer> getAllCustomers();
 
 }

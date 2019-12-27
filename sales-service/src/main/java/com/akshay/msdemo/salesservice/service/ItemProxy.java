@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
-@FeignClient(name="item", url="localhost:9000")
-//@FeignClient(name="item")       // you do not need the url while using the Ribbon load balancing
-//@RibbonClient(name = "item")
+//@FeignClient(name="item", url="localhost:9000")
+@FeignClient(name="item")       // you do not need the url while using the Ribbon load balancing
+//@FeignClient(name="zuul-api-gateway-server")    // to make requests go through the ZUUL API GATEWAY
+@RibbonClient(name = "item")
 public interface ItemProxy {
 
-    @GetMapping("items/{name}")
+    @GetMapping("/api/items/{name}")
     public Item findItemByName(@PathVariable("name") String name);
 
 //    @PostMapping("items/add")

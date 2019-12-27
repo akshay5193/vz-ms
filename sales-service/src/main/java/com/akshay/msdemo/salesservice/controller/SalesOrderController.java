@@ -1,6 +1,7 @@
 package com.akshay.msdemo.salesservice.controller;
 
 import com.akshay.msdemo.salesservice.model.Customer;
+import com.akshay.msdemo.salesservice.model.Item;
 import com.akshay.msdemo.salesservice.service.CustomerServiceProxy;
 import com.akshay.msdemo.salesservice.model.SalesOrder;
 import com.akshay.msdemo.salesservice.service.ItemProxy;
@@ -50,8 +51,9 @@ public class SalesOrderController {
             System.out.println("email matched...");
 
             for(String item: itemNames){
-                if (itemProxy.findItemByName(item) != null) {
-                    calculatedTotal += itemProxy.findItemByName(item).getPrice();
+                Item itemObject = itemProxy.findItemByName(item);
+                if (itemObject != null) {
+                    calculatedTotal += itemObject.getPrice();
 //                    continue;
                 }
                 else {
