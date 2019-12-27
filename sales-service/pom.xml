@@ -44,6 +44,7 @@
             <version>1.4.7.RELEASE</version>
         </dependency>
 
+        <!--    RIBBON    -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-ribbon</artifactId>
@@ -80,6 +81,27 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <!--    END     -->
+
+        <!--    SLEUTH    -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        <!--    END OF SLEUTH    -->
+
+        <!--    ZIPKIN    -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+        </dependency>
+        <!--    END OF ZIPKIN    -->
+
+        <!--    AMQP     -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+        <!--    END OF AMQP    -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

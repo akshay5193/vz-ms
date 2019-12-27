@@ -25,6 +25,7 @@ public class Customer {
 
     @Size(min = 5, max = 180)
     @NotNull
+    @Column(unique=true)
     private String email;
 
 //    -----------------------------------------------------------------
