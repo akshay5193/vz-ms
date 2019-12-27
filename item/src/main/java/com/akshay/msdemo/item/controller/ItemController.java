@@ -10,18 +10,19 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/items")
 public class ItemController {
 
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("items")
+    @GetMapping("/")
     public List<Item> getAllItems() {
         System.out.println("Getting all items");
         return itemService.getAllItems();
     }
 
-    @PostMapping("items/add")
+    @PostMapping("/add")
     public  Item addNewItem(@Valid @ModelAttribute("items") Item item, BindingResult result){
         if (result.hasErrors()) {
             return  null;
@@ -30,7 +31,7 @@ public class ItemController {
         return itemService.addItem(item);
     }
 
-    @GetMapping("items/{name}")
+    @GetMapping("/{name}")
     public Item findItemByName(@PathVariable("name") String name) {
         Item itemWithName = itemService.getItemByName(name);
         return  itemWithName;

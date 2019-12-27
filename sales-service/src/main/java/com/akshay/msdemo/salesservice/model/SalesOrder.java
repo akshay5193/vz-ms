@@ -44,7 +44,7 @@ public class SalesOrder {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
-    protected SalesOrder() {
+    public SalesOrder() {
     }
 
     public SalesOrder(String description, String email) {
