@@ -139,4 +139,13 @@ public class SalesOrderController {
         return null;
     }
 
+    @GetMapping("/{customerEmail}/{itemName}")
+    public SalesOrder getFirstOrder(@PathVariable("customerEmail") String customerEmail, @PathVariable("itemName") String itemName) {
+
+        Customer validatedCustomer = customerServiceProxy.getCustomerByEmail(customerEmail);
+        Item validatedItem = itemProxy.retrieveConfiguration();
+
+        return null;
+    }
+
 }

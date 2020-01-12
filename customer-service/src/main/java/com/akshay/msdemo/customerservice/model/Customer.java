@@ -17,13 +17,13 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2, max = 90)
+    @Size(min = 2, max = 90, message = "First Name should have atleast 2 characters")
     private String first_name;
 
-    @Size(min = 2, max = 90)
+    @Size(min = 2, max = 90, message = "Last Name should have atleast 2 characters")
     private String last_name;
 
-    @Size(min = 5, max = 180)
+    @Size(min = 5, max = 180, message = "Please enter a valid email id")
     @NotNull
     @Column(unique=true)
     private String email;
