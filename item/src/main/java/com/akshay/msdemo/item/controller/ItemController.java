@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/items")
+@RequestMapping("/items")
 public class ItemController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class ItemController {
         return itemService.getAllItems();
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public  Item addNewItem(@Valid @ModelAttribute("items") Item item, BindingResult result){
         if (result.hasErrors()) {
             return  null;
