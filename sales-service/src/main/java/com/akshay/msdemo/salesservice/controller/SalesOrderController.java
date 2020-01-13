@@ -120,11 +120,11 @@ public class SalesOrderController {
             else {
                 // send message saying items currently not available in the store...
                 System.out.println("Few items in your order are currently not available in the store...");
-                return null;
+                return -1L;
             }
         }
         System.out.println("Customer with the provided email is not registered yet... [tracked in sales-order while placing the order!");
-        return null;
+        return -1L;
     }
 
 //    --------------------------------------------------------------------------------------------------
