@@ -51,4 +51,9 @@ public class OrderLineItemService {
         }
     }
 
+    public List<OrderLineItem> getOrderLineItemsByOrderId(Long orderId) {
+        List<OrderLineItem> orderItems = orderLineItemRepository.findByOrderId(orderId);
+        return orderItems;
+    }
+
 }

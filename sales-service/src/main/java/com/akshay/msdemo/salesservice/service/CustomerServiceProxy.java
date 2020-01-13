@@ -21,11 +21,11 @@ public interface CustomerServiceProxy  {
     }
 
 //    @GetMapping("/api/customers/{email}")
-    @GetMapping("/customer-service/cust-api/api/customers/{email}")
+    @GetMapping("/customer-service/cust-api/customers/{email}")
     public Customer getCustomerByEmail(@PathVariable("email") String email);
 
 //    @GetMapping("/api/customers")
-    @GetMapping("/customer-service/cust-api/api/customers")
+    @GetMapping("/customer-service/cust-api/customers")
     public List<Customer> getAllCustomers();
 
 }
