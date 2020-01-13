@@ -113,10 +113,6 @@ public class SalesOrderController {
                 // send the orderData to service and persist the object
                 System.out.println("flag = true , so everything looks good and now attempting to create the order");
 
-//                SalesOrder orderData = new SalesOrder();
-//                orderData.setTotalPrice(calculatedTotal);
-//                orderData.
-
                 SalesOrder orderToPersist = salesOrderService.addNewOrder(customerEmail, description, calculatedTotal);
                 orderLineItemService.addItemsToOrder(itemNames, orderToPersist.getId());
                 return orderToPersist.getId();
