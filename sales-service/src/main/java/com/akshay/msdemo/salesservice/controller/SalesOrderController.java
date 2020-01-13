@@ -142,10 +142,9 @@ public class SalesOrderController {
 
     @GetMapping("/{customerEmail}" )
     public List<Object> getOrdersByEmail(@PathVariable("customerEmail") String customerEmail) {
-        List<SalesOrder> matchingOrders = salesOrderService.findOrdersByEmail(customerEmail);
-        List<SalesOrder> salesOrders = this.salesOrderService.findOrdersByEmail(customerEmail);
+        List<SalesOrder> matchingSalesOrders = this.salesOrderService.findOrdersByEmail(customerEmail);
 
-        return salesOrders.stream().map(salesOrder -> {
+        return matchingSalesOrders.stream().map(salesOrder -> {
             List<OrderLineItem> items = orderLineItemService.getOrderLineItemsByOrderId(salesOrder.getId());
             System.out.println(items.size());
             List<String> itemNames = new ArrayList<>();
