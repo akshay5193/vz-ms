@@ -151,6 +151,7 @@ public class SalesOrderController {
 
         return salesOrders.stream().map(salesOrder -> {
             List<OrderLineItem> items = orderLineItemService.getOrderLineItemsByOrderId(salesOrder.getId());
+            System.out.println(items.size());
             List<String> itemNames = new ArrayList<>();
             items.forEach(item -> {
                 for(int i=0 ; i<item.getQuantity() ; i++) {
