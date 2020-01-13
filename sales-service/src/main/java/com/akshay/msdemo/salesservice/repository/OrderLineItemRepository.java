@@ -13,4 +13,6 @@ public interface OrderLineItemRepository extends CrudRepository<OrderLineItem, L
 
     OrderLineItem findByItemNameAndOrderId(String name, Long orderId);
 
+    List<OrderLineItem> findByOrderId(Long orderId);
+
 }

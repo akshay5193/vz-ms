@@ -29,8 +29,8 @@ public class SalesOrder {
 
     private String customerEmail;
 
-    @ElementCollection
-    List<String> itemsList = new ArrayList<String>();
+//    @ElementCollection
+//    List<String> itemsList = new ArrayList<String>();
 
 //    @ElementCollection
 //    private List<Long> itemIds = new ArrayList<>();
@@ -76,13 +76,13 @@ public class SalesOrder {
         this.customerEmail = customerEmail;
     }
 
-    public List<String> getItemsList() {
-        return itemsList;
-    }
-
-    public void setItemsList(List<String> itemsList) {
-        this.itemsList = itemsList;
-    }
+//    public List<String> getItemsList() {
+//        return itemsList;
+//    }
+//
+//    public void setItemsList(List<String> itemsList) {
+//        this.itemsList = itemsList;
+//    }
 
     public Double getTotalPrice() {
         return totalPrice;

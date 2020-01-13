@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RibbonClient(name = "item")
 public interface ItemProxy {
 
-    @GetMapping("/item/api/items/{name}")
+    @GetMapping("/item/item-api/items/{name}")
     public Item findItemByName(@PathVariable("name") String name);
 
     @GetMapping("/fault-tolerance-example")
