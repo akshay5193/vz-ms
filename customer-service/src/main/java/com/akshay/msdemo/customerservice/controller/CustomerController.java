@@ -4,6 +4,7 @@ import com.akshay.msdemo.customerservice.exceptions.CustomerNotFoundException;
 import com.akshay.msdemo.customerservice.model.Customer;
 import com.akshay.msdemo.customerservice.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -23,9 +24,10 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-
+    @Cacheable(value = "customer", key = "#email")
     @GetMapping(value = "/{email}", produces = "application/json")
     public Customer getCustomerByEmail(@PathVariable("email") String email) {
+        System.out.println("in controller function...");
         Customer customerWithEmail = customerService.findByEmail(email);
         if (customerWithEmail == null) {
             System.out.println("customer with email: " + email + " not found...");

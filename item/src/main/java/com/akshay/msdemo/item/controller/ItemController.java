@@ -4,6 +4,7 @@ import com.akshay.msdemo.item.model.Item;
 import com.akshay.msdemo.item.service.ItemService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,10 +33,12 @@ public class ItemController {
         return itemService.addItem(item);
     }
 
-    @GetMapping("/{name}")
+    @Cacheable(value = "item-name", key = "#itemName")
+    @GetMapping("/{itemName}")
 //    @HystrixCommand(fallbackMethod = )
-    public Item findItemByName(@PathVariable("name") String name) {
-        Item itemWithName = itemService.getItemByName(name);
+    public Item findItemByName(@PathVariable("itemName") String itemName) {
+        System.out.println("api call");
+        Item itemWithName = itemService.getItemByName(itemName);
         return  itemWithName;
     }
 
