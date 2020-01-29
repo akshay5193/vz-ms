@@ -29,23 +29,6 @@ public class Customer implements Serializable {
     @Column(unique=true)
     private String email;
 
-//    -----------------------------------------------------------------
-
-//    @OneToMany(mappedBy="customer", fetch = FetchType.LAZY)
-//    private List<SalesOrder> orders;
-
-    @ElementCollection
-    private List<Long> itemIds = new ArrayList<>();
-
-    public List<Long> getItemIds() {
-        return itemIds;
-    }
-
-    public void setItemIds(List<Long> itemIds) {
-        this.itemIds = itemIds;
-    }
-//    -----------------------------------------------------------------
-
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createAt;

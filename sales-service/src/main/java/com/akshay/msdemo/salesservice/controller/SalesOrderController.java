@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/sales-order", produces = "application/json")
+@RequestMapping(value = "/sales-orders", produces = "application/json")
 public class SalesOrderController {
 
     @Autowired
@@ -123,22 +123,12 @@ public class SalesOrderController {
                 return -1L;
             }
         }
-        System.out.println("Customer with the provided email is not registered yet... [tracked in sales-order while placing the order!");
+//        System.out.println("Customer with the provided email is not registered yet... [tracked in sales-order while placing the order!");
+        System.out.println("Customer Service down or Email Not Registered yet...");
         return -1L;
     }
 
 //    --------------------------------------------------------------------------------------------------
-
-
-//    @GetMapping("/{customerEmail}" )
-//    public List<SalesOrder> getOrdersByEmail(@PathVariable("customerEmail") String customerEmail) {
-//        List<SalesOrder> matchingOrders = salesOrderService.findOrdersByEmail(customerEmail);
-//        if (matchingOrders != null) {
-//            System.out.println(matchingOrders + "...MO...");
-//            return matchingOrders;
-//        }
-//        return null;
-//    }
 
     @GetMapping("/{customerEmail}" )
     public List<Object> getOrdersByEmail(@PathVariable("customerEmail") String customerEmail) {

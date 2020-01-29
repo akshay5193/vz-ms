@@ -28,13 +28,6 @@ public class Item implements Serializable {
     @DecimalMin("0.1")
     private Double price;
 
-//    -----------------------------------------------------
-
-    @ElementCollection
-    private List<Long> customerIds = new ArrayList<>();
-
-//    -----------------------------------------------------
-
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createAt;
