@@ -5,6 +5,7 @@ import com.akshay.msdemo.item.service.ItemService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.env.Environment;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,14 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private Environment environment;
+
     @GetMapping("/")
     public List<Item> getAllItems() {
         System.out.println("Getting all items");
+        String serverPort = environment.getProperty("local.server.port");
+        System.out.println("Port: " + serverPort);
         return itemService.getAllItems();
     }
 
@@ -30,6 +36,8 @@ public class ItemController {
             return  null;
         }
         System.out.println("Creating a new item...");
+        String serverPort = environment.getProperty("local.server.port");
+        System.out.println("Port: " + serverPort);
         return itemService.addItem(item);
     }
 
@@ -39,6 +47,8 @@ public class ItemController {
     public Item findItemByName(@PathVariable("itemName") String itemName) {
         System.out.println("api call");
         Item itemWithName = itemService.getItemByName(itemName);
+        String serverPort = environment.getProperty("local.server.port");
+        System.out.println("Port: " + serverPort);
         return  itemWithName;
     }
 
